@@ -76,7 +76,7 @@ function main() {
 main();
 
 // Permet d'être réutilisé dans la fonction quandRechercheArtefact
-let nomEpoqueActuelle;
+
 
 // ============================================
 // EXERCICE 1 : Le Téléporteur Temporel ⏰
@@ -95,7 +95,7 @@ function voyagerTemps(destination, callback){
     }
    ,generationNombreAleatoireEntre(1000,3000))
 }
-quandEpoqueChoisie(nomEpoque)
+
 
 
 // Crée la fonction voyagerTemps(destination, callback)
@@ -104,6 +104,7 @@ quandEpoqueChoisie(nomEpoque)
 // Fonction appelée quand le formulaire de voyage temporel est envoyé
 function quandEpoqueChoisie(epoqueDestination) {
   // localisationEpoqueHTML.setAttribute("style", "display:none")
+  nomEpoqueActuelle = epoqueDestination
   localisationEpoqueHTML.style.display = "none"
   document.querySelector(".voyage_en_cours").style.display = "flex"
   
@@ -126,18 +127,43 @@ function quandEpoqueChoisie(epoqueDestination) {
 // 📖 Consignes : Consulte le README pour les détails
 
 // ✍️ TON CODE ICI
+
+function collecterArtefact(nomArtefact, callback){
+  
+  setTimeout(()=>{
+    let chance_succes = Math.random() * 100
+    if (chance_succes<50){
+      callback(false)
+
+    }
+    else{
+  
+      callback(true)
+    }
+    
+  },
+  generationNombreAleatoireEntre(1000,3000)
+  )
+}
 // Crée la fonction collecterArtefact(nomArtefact, callback)
 // Le callback reçoit true ou false selon le succès
 
 // Fonction appelée quand le formulaire de recherche d'artefact est envoyé
 function quandRechercheArtefact(artefact) {
   console.log(artefact);
+  document.querySelector(".recherche_en_cours").style.display= "flex",
+  collecterArtefact(artefact,function (success){
+    document.querySelector(".recherche_en_cours").style.display ="None"
+    afficherRechercheArtefact({ artefact, epoque: nomEpoqueActuelle, success })
+    
+  })
+  }
 
   // ✍️ TON CODE ICI
   // Utilise collecterArtefact() ici
   // Avant : affiche .recherche_en_cours
   // Après (callback) : cache le loader et appelle afficherRechercheArtefact()
-}
+
 
 // ============================================
 // EXERCICE 3 : La Mission Temporelle Complexe 🔗
