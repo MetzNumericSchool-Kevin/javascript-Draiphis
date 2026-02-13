@@ -90,7 +90,7 @@ function voyagerTemps(destination, callback){
   console.log("Voyage en cours vers : ", destination)
   setTimeout(()=>
     {
-      callback()
+      callback(destination)
       console.log("Arrivée à l'époque : ", destination)
     }
    ,generationNombreAleatoireEntre(1000,3000))
@@ -172,6 +172,31 @@ function quandRechercheArtefact(artefact) {
 // 📖 Consignes : Consulte le README pour les détails
 
 // ✍️ TON CODE ICI
+function missionTemporelleComplexe(){
+  voyagerTemps("Médievale",(destination)=>{
+    console.log("Voyager à l'époque "+ destination)
+  collecterArtefact("épée de chevalier",()=>{
+    console.log("Récupérer l'épée de chevalier")
+    voyagerTemps("Romaine",(destination)=>{ 
+      console.log("Voyager à l'époque Romaine", destination)
+      collecterArtefact("bouclier romain",(artefact)=>{
+        console.log("Récupérer le bouclier romain")
+        collecterArtefact("épée romaine",()=>{
+          console.log("Récupérer l'épée romaine")
+          console.log("Travail terminé")
+        })
+        
+        
+        
+      })
+      
+    })
+  })
+})
+}
+
+missionTemporelleComplexe()
+
 // Crée la fonction missionTemporelleComplexe()
 // Exécute la séquence : medievale → épée chevalier → romaine → bouclier romain → épée romaine
 
