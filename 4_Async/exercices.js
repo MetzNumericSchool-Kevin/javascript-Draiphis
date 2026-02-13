@@ -85,13 +85,33 @@ let nomEpoqueActuelle;
 // 📖 Consignes : Consulte le README pour les détails
 
 // ✍️ TON CODE ICI
+
+function voyagerTemps(destination, callback){
+  console.log("Voyage en cours vers : ", destination)
+  setTimeout(()=>
+    {
+      callback()
+      console.log("Arrivée à l'époque : ", destination)
+    }
+   ,generationNombreAleatoireEntre(1000,3000))
+}
+quandEpoqueChoisie(nomEpoque)
+
+
 // Crée la fonction voyagerTemps(destination, callback)
 // Utilise setTimeout() avec generationNombreAleatoireEntre(1000, 3000)
 
 // Fonction appelée quand le formulaire de voyage temporel est envoyé
-function quandEpoqueChoisie(nomEpoque) {
-  nomEpoqueActuelle = nomEpoque;
-  console.log(nomEpoqueActuelle);
+function quandEpoqueChoisie(epoqueDestination) {
+  // localisationEpoqueHTML.setAttribute("style", "display:none")
+  localisationEpoqueHTML.style.display = "none"
+  document.querySelector(".voyage_en_cours").style.display = "flex"
+  
+  voyagerTemps(epoqueDestination,()=>{
+    afficherDestination(epoqueDestination)
+    document.querySelector(".voyage_en_cours").style.display = "None"
+    localisationEpoqueHTML.style.display = "flex"
+  })
 
   // ✍️ TON CODE ICI
   // Utilise voyagerTemps() ici
